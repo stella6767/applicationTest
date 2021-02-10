@@ -33,8 +33,9 @@ public class BookController {
 	@Transactional(readOnly = true)
 	@GetMapping("/book")
 	public List<Book> findAll() {
+//		List<Book> books = bookRepository.findAll();
+//		System.out.println("배열 사이즈는" + books.size());
 		return bookRepository.findAll();
-		
 	}
 	
 	@Transactional(readOnly = true)

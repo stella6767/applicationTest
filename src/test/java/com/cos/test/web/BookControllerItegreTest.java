@@ -51,6 +51,7 @@ public class BookControllerItegreTest {
 	@BeforeEach
 	private void init() {
 		entityManager.createNativeQuery("ALTER TABLE book ALTER COLUMN id RESTART WITH 1").executeUpdate();
+		bookRepository.deleteAll();
 	}
 
 	@Test
@@ -79,6 +80,7 @@ public class BookControllerItegreTest {
 				.accept(MediaType.APPLICATION_JSON_UTF8));
 		
 		resultActions.andExpect(jsonPath("$.[0].title").value("제목1"))
+		.andExpect(jsonPath("$", Matchers.hasSize(3)))//뭐지? junit5이 내장돼 있음에도 불구하고 내가 라이브러리를 또 추가시켜줬기 때문! build패스에서 제거
 		.andDo(MockMvcResultHandlers.print());
 		
 	}
